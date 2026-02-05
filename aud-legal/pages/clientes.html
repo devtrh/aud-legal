@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Clientes - ArchivoUnico</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2563EB",
+                        "primary-dark": "#1D4ED8",
+                        "surface": "#FFFFFF",
+                        "background": "#F9FAFB",
+                        "border-subtle": "#E5E7EB",
+                        "text-main": "#111827",
+                        "text-muted": "#6B7280",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "1.5rem", "xl": "2rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #F1F5F9; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+
+<body class="bg-background text-text-main font-display overflow-hidden">
+    <div class="flex h-screen w-full">
+        <!-- Sidebar Desktop -->
+        <aside class="hidden lg:flex w-72 flex-col justify-between border-r border-border-subtle bg-surface p-6 z-20">
+            <div class="flex flex-col gap-8">
+                <div class="flex items-center gap-3 px-2 cursor-pointer" onclick="window.location.href='../index.html'">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white shadow-sm">
+                        <span class="material-symbols-outlined text-3xl">gavel</span>
+                    </div>
+                    <h1 class="text-xl font-bold tracking-tight text-slate-800">Archivo<span class="text-primary">Unico</span></h1>
+                </div>
+                <nav class="flex flex-col gap-2">
+                    <a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-colors" href="panel1.html">
+                        <span class="material-symbols-outlined">dashboard</span>
+                        <span class="text-sm font-medium">Panel de Control</span>
+                    </a>
+                    <a class="flex items-center gap-4 px-4 py-3 rounded-xl bg-primary/10 text-primary-dark border border-primary/10 font-medium" href="clientes.html">
+                        <span class="material-symbols-outlined fill">group</span>
+                        <span class="text-sm">Clientes</span>
+                    </a>
+                    <a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-colors" href="expedientes.html">
+                        <span class="material-symbols-outlined">library_books</span>
+                        <span class="text-sm font-medium">Expedientes</span>
+                    </a>
+                    <a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-colors" href="archivo.html">
+                        <span class="material-symbols-outlined">folder_open</span>
+                        <span class="text-sm font-medium">Archivo</span>
+                    </a>
+                </nav>
+            </div>
+            <div class="flex flex-col gap-4">
+                <a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-colors" href="ajustes.html">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span class="text-sm font-medium">Ajustes</span>
+                </a>
+                <div id="sidebar-userinfo" class="flex items-center gap-3 rounded-2xl bg-slate-50 p-3 border border-slate-200" title="">
+                    <div id="sidebar-photo" class="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-sm ring-2 ring-white">
+                        U
+                    </div>
+                    <div class="flex flex-col overflow-hidden">
+                        <p id="sidebar-username" class="truncate text-sm font-bold text-slate-800">Usuario</p>
+                        <p id="sidebar-role" class="truncate text-xs text-slate-500">Rol</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Sidebar Mobile -->
+        <aside id="sidebar-mobile" class="fixed inset-0 z-50 lg:hidden">
+            <div id="sidebar-backdrop" class="absolute inset-0 bg-black/50 backdrop-blur-sm hidden"></div>
+            <div id="sidebar-content" class="absolute left-0 top-0 h-full w-72 bg-surface border-r border-border-subtle transform -translate-x-full transition-transform duration-300">
+                <div class="flex flex-col h-full justify-between p-6">
+                    <div class="flex flex-col gap-8">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white shadow-sm">
+                                    <span class="material-symbols-outlined text-3xl">gavel</span>
+                                </div>
+                                <h1 class="text-xl font-bold tracking-tight text-slate-800">Archivo<span class="text-primary">Unico</span></h1>
+                            </div>
+                            <button id="close-sidebar-btn" class="text-slate-600 hover:text-slate-900">
+                                <span class="material-symbols-outlined text-xl">close</span>
+                            </button>
+                        </div>
+                        <nav class="flex flex-col gap-2">
+                            <a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-colors" href="panel1.html">
+                                <span class="material-symbols-outlined">dashboard</span>
+                                <span class="text-sm font-medium">Panel de Control</span>
+                            </a>
+                            <a class="flex items-center gap-4 px-4 py-3 rounded-xl bg-primary/10 text-primary-dark border border-primary/10 font-medium" href="clientes.html">
+                                <span class="material-symbols-outlined fill">group</span>
+                                <span class="text-sm">Clientes</span>
+                            </a>
+                            <a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-colors" href="expedientes.html">
+                                <span class="material-symbols-outlined">library_books</span>
+                                <span class="text-sm font-medium">Expedientes</span>
+                            </a>
+                            <a class="flex items-center gap-4 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-colors" href="archivo.html">
+                                <span class="material-symbols-outlined">folder_open</span>
+                                <span class="text-sm font-medium">Archivo</span>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex flex-1 flex-col h-screen overflow-hidden relative bg-slate-50/50">
+            <!-- Header -->
+            <header class="flex h-20 items-center justify-between border-b border-border-subtle bg-surface px-6 lg:px-10 shrink-0">
+                <div class="flex items-center gap-4 lg:hidden">
+                    <button id="menu-toggle-btn" class="text-slate-800 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                    <h2 class="text-lg font-bold text-slate-800">Clientes</h2>
+                </div>
+                <div class="hidden lg:flex w-full max-w-md items-center gap-4">
+                    <h2 class="text-xl font-bold text-slate-800">Clientes Externos</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="relative hidden sm:block">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+                        <input id="search-global" class="h-10 w-64 rounded-xl border-none bg-slate-100 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all shadow-inner" placeholder="Búsqueda global..." type="text">
+                    </div>
+                    <div class="h-6 w-px bg-slate-200 hidden sm:block"></div>
+                    <button class="relative flex h-10 w-10 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors shadow-sm">
+                        <span class="material-symbols-outlined text-xl">notifications</span>
+                        <span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+                    </button>
+                    <button id="btn-nuevo-cliente" class="flex h-10 px-4 items-center justify-center gap-2 rounded-full bg-primary text-white hover:bg-primary-dark transition-colors shadow-lg">
+                        <span class="material-symbols-outlined text-xl">person_add</span>
+                        <span class="text-sm font-medium hidden sm:inline">Nuevo Cliente</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="flex flex-1 overflow-hidden p-4 lg:p-6 gap-6">
+                <!-- Lista de Clientes (Sidebar) -->
+                <div class="flex flex-col w-full lg:w-[380px] shrink-0 gap-4 h-full bg-white lg:bg-transparent rounded-2xl lg:rounded-none overflow-hidden border border-slate-200 lg:border-none shadow-sm lg:shadow-none">
+                    <div class="flex flex-col gap-3 lg:pr-2 p-4 lg:p-0">
+                        <div class="relative w-full">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                            <input id="search-clientes" type="text" placeholder="Buscar por nombre, RFC..." class="h-12 w-full rounded-2xl border border-slate-200 bg-white pl-12 pr-4 text-sm text-slate-800 placeholder-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-sm">
+                        </div>
+                        <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+                            <button class="px-4 py-2 rounded-full bg-slate-800 text-white text-xs font-medium whitespace-nowrap shadow-md" data-filter="Todos">Todos</button>
+                            <button class="px-4 py-2 rounded-full bg-white border border-slate-200 text-slate-600 hover:border-primary/50 hover:text-primary text-xs font-medium whitespace-nowrap transition-colors" data-filter="Activo">Activos</button>
+                            <button class="px-4 py-2 rounded-full bg-white border border-slate-200 text-slate-600 hover:border-primary/50 hover:text-primary text-xs font-medium whitespace-nowrap transition-colors" data-filter="Inactivo">Inactivos</button>
+                        </div>
+                        <!-- Stats -->
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="bg-slate-50 rounded-xl p-3 border border-slate-100">
+                                <p class="text-[10px] text-slate-500 mb-0.5">Total</p>
+                                <p id="stat-total-clientes" class="text-lg font-bold text-slate-800">0</p>
+                            </div>
+                            <div class="bg-green-50 rounded-xl p-3 border border-green-100">
+                                <p class="text-[10px] text-green-600 mb-0.5">Activos</p>
+                                <p id="stat-clientes-activos" class="text-lg font-bold text-green-700">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Lista -->
+                    <div id="clientes-lista" class="flex-1 overflow-y-auto lg:pr-2 space-y-3 px-4 lg:px-0">
+                        <!-- Se llenan dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Detalle del Cliente -->
+                <div id="cliente-detalle-panel" class="flex-1 hidden lg:flex flex-col rounded-[2rem] border border-slate-200 bg-white shadow-sm overflow-hidden">
+                    <div class="flex-1 flex items-center justify-center text-slate-400">
+                        <div class="text-center">
+                            <span class="material-symbols-outlined text-6xl mb-4">person_search</span>
+                            <p class="text-lg font-medium text-slate-500">Selecciona un cliente para ver los detalles</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Nuevo Cliente -->
+    <div id="modal-nuevo-cliente" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-auto">
+            <div class="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between rounded-t-2xl">
+                <h3 class="text-xl font-bold text-slate-800">Nuevo Cliente</h3>
+                <button onclick="ClientesModule.ocultarModal()" class="text-slate-400 hover:text-slate-600">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <form id="form-nuevo-cliente" class="p-6 space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-slate-700 mb-2">RFC *</label>
+                        <input type="text" name="rfc" required maxlength="13" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary/20">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Razón Social *</label>
+                        <input type="text" name="razon_social" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary/20">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Nombre Comercial</label>
+                        <input type="text" name="nombre_comercial" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary/20">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Giro</label>
+                        <input type="text" name="giro" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary/20">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Notas</label>
+                        <textarea name="notas" rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary/20"></textarea>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="button" onclick="ClientesModule.ocultarModal()" class="px-6 py-3 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50">Cancelar</button>
+                    <button type="submit" class="px-6 py-3 rounded-xl bg-primary text-white hover:bg-primary-dark">Crear Cliente</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/clientes.js"></script>
+    <script src="../assets/js/mobile-menu.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = window.getUser();
+            if (user) {
+                const usernameEls = document.querySelectorAll('#sidebar-username, #sidebar-username-mobile');
+                const roleEls = document.querySelectorAll('#sidebar-role, #sidebar-role-mobile');
+                usernameEls.forEach(el => el.textContent = user.nombre || 'Usuario');
+                roleEls.forEach(el => el.textContent = user.rol_nombre || 'Rol');
+            }
+        });
+    </script>
+</body>
+</html>
